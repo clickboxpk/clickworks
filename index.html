@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b5d57">
+<title>PAFWA Skills Development Centre NRK</title>
+<style>
+:root{--bg:#f4f6f5;--c:#fff;--t:#14201e;--m:#667570;--p:#0b5d57;--pt:#fff;--ok:#157a43;--no:#c62828;--b:#dbe3e0}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1514;--c:#16201e;--t:#e6eeec;--m:#92a39e;--p:#2bb3a6;--pt:#06201d;--ok:#4cc98a;--no:#ff7b72;--b:#26332f}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--t);padding:env(safe-area-inset-top) 0 calc(72px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:5;background:var(--p);color:var(--pt);display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top))}
+header b{display:block;font-size:.95rem;line-height:1.2}
+header small{opacity:.85}
+main{max-width:640px;margin:0 auto;padding:14px}
+h3{margin:20px 0 8px}
+input,select,textarea,button{font:inherit;color:inherit}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--b);border-radius:10px;background:var(--c);margin:0 0 10px}
+textarea{resize:vertical}
+label{display:block;font-size:.9rem;color:var(--m);margin:4px 0}
+button{cursor:pointer;border:0;border-radius:10px;padding:12px 16px;background:var(--c);border:1px solid var(--b)}
+.pri{background:var(--p);color:var(--pt);border-color:var(--p);width:100%;font-weight:600;margin-top:6px}
+.ghost{background:transparent;border-color:transparent;padding:8px 10px}
+header .ghost{color:var(--pt);border:1px solid rgba(255,255,255,.4)}
+.bar{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:380px){.bar{grid-template-columns:1fr}}
+.card{background:var(--c);border:1px solid var(--b);border-radius:12px;padding:14px;margin-bottom:10px}
+.card h4{margin:0 0 2px;font-size:1.05rem}
+.m{color:var(--m)}
+.tag{float:right;font-size:.8rem;padding:2px 10px;border-radius:99px;border:1px solid var(--b)}
+.tag.ok{color:var(--ok);border-color:var(--ok)}.tag.no{color:var(--no);border-color:var(--no)}
+.nums{display:flex;gap:16px;margin:8px 0}
+.nums b{font-size:1.3rem}.nums .g{color:var(--ok)}.nums .r{color:var(--no)}
+details summary{cursor:pointer;color:var(--p);padding:4px 0}
+details div{padding:3px 0;border-top:1px solid var(--b)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--c);border:1px solid var(--b);border-radius:10px;padding:12px;margin-bottom:6px;min-height:52px;cursor:pointer}
+.row small{display:block;color:var(--no)}
+.row.ab{border-color:var(--no)}
+.pill{font-size:.85rem;padding:5px 12px;border-radius:99px;border:1px solid var(--ok);color:var(--ok)}
+.pill.a{border-color:var(--no);color:var(--no)}
+.sum{position:sticky;top:calc(56px + env(safe-area-inset-top));background:var(--bg);padding:6px 0;font-weight:600}
+.chk label{display:flex;gap:8px;align-items:center;color:var(--t);padding:4px 0}
+.chk input{width:auto;margin:0}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--c);border-top:1px solid var(--b);padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav button{flex:1;border:0;border-radius:0;background:none;padding:8px 2px;font-size:.75rem;color:var(--m);display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button.on{color:var(--p);font-weight:700}
+.login{max-width:360px;margin:12vh auto 0;padding:20px}
+.login h1{font-size:1.25rem;line-height:1.25;margin:0 0 4px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));background:#222;color:#fff;padding:10px 16px;border-radius:10px;z-index:9;max-width:90%;display:none}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast"></div>
+<script>
+const API='PASTE_WEB_APP_URL_HERE';   // <-- Apps Script ka Web App URL yahan lagayein
+const COURSES=['CO/IT Asstt (A)','CO/IT Asstt (B)','DM','CGP'];
+const ROLE={admin:'Admin',teacher:'Teacher',principal:'Principal',coordinator:'Chief Coordinator'};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let tok=sessionStorage.t||'',me=null,tab='',S={};
+const today=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',2800)}
+async function api(a,d={}){
+  try{
+    const r=await(await fetch(API,{method:'POST',body:JSON.stringify({a,t:tok,...d})})).json();
+    if(r.err==='auth'){logout();toast('Dobara login karein');return null}
+    if(r.err){toast(r.err);return null}
+    return r;
+  }catch(e){toast('Internet ya connection ka masla hai');return null}
+}
+function logout(){tok='';sessionStorage.t='';me=null;vLogin()}
+const courseSel=()=>{const cs=me.courses;if(!cs.includes(S.c))S.c=cs[0];
+  return cs.length>1?`<select id="cs">${cs.map(c=>`<option ${c==S.c?'selected':''}>${esc(c)}</option>`).join('')}</select>`:`<b>${esc(S.c)}</b>`};
+
+function vLogin(){
+  $('#app').innerHTML=`<div class="login"><h1>PAFWA Skills Development Centre NRK</h1><p class="m">Sirf staff ke liye. Login karein.</p>
+  <input id="u" placeholder="Username" autocapitalize="none" autocomplete="username">
+  <input id="p" type="password" placeholder="Password" autocomplete="current-password">
+  <button id="go" class="pri">Login</button></div>`;
+  const go=async()=>{$('#go').disabled=true;const r=await api('login',{u:$('#u').value,p:$('#p').value});$('#go').disabled=false;
+    if(r){tok=r.t;sessionStorage.t=tok;me=r.me;S={};tab='';draw()}};
+  $('#go').onclick=go;$('#p').onkeydown=e=>{if(e.key==='Enter')go()};
+}
+
+function draw(){
+  const T={dash:['📊','Dashboard'],att:['✅','Attendance'],stu:['👥','Students'],usr:['🔑','Users']};
+  const tabs=me.role==='teacher'?['att','stu']:me.role==='admin'?['dash','att','stu','usr']:['dash'];
+  if(!tabs.includes(tab))tab=tabs[0];
+  $('#app').innerHTML=`<header><div><b>PAFWA Skills Development Centre NRK</b><small>${esc(me.name)} (${ROLE[me.role]})</small></div><button id="lo" class="ghost">Logout</button></header><main id="main"></main>`+
+   (tabs.length>1?`<nav>${tabs.map(t=>`<button data-t="${t}" class="${t==tab?'on':''}"><span style="font-size:1.25rem">${T[t][0]}</span>${T[t][1]}</button>`).join('')}</nav>`:'');
+  $('#lo').onclick=logout;
+  document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;draw()});
+  ({dash:vDash,att:vAtt,stu:vStu,usr:vUsr})[tab]();
+}
+
+async function vDash(){
+  const dt=S.dd||today();
+  $('#main').innerHTML=`<input type="date" id="dd" value="${dt}"><div id="out" class="m">Loading…</div>`;
+  $('#dd').onchange=e=>{S.dd=e.target.value||today();vDash()};
+  const r=await api('dash',{date:dt});if(!r)return;
+  $('#out').innerHTML=r.items.map(i=>!i.topic?
+   `<div class="card"><span class="tag no">Pending</span><h4>${esc(i.course)}</h4><span class="m">Is din ka record upload nahi hua</span></div>`:
+   `<div class="card"><span class="tag ok">Updated</span><h4>${esc(i.course)}</h4><div class="m">Instructor: ${esc(i.by)}</div>
+    <p style="margin:8px 0 0"><b>Topic:</b> ${esc(i.topic)}</p>
+    <div class="nums"><span class="g"><b>${i.present}</b> Present</span><span class="r"><b>${i.absent.length}</b> Absent</span><span class="m"><b>${i.total}</b> Total</span></div>
+    ${i.absent.length?`<details><summary>Absent students</summary>${i.absent.map(n=>`<div>${esc(n)} <small class="m">— miss: ${esc(i.topic)}</small></div>`).join('')}</details>`:''}</div>`).join('');
+}
+
+async function vAtt(){
+  S.ad=S.ad||today();
+  $('#main').innerHTML=`<div class="bar">${courseSel()}<input type="date" id="ad" max="${today()}" value="${S.ad}"></div><div id="bx" class="m">Loading…</div>`;
+  if($('#cs'))$('#cs').onchange=e=>{S.c=e.target.value;vAtt()};
+  $('#ad').onchange=e=>{S.ad=e.target.value||today();vAtt()};
+  const r=await api('day',{course:S.c,date:S.ad});if(!r)return;
+  const st=r.students;
+  if(!st.length){$('#bx').innerHTML='Is class mein abhi students nahi hain. "Students" tab se naam add karein.';return}
+  $('#bx').className='';
+  $('#bx').innerHTML=`<label>Aaj parhaya gaya topic</label><textarea id="tp" rows="2" placeholder="Topic likhein">${esc(r.topic)}</textarea>
+   <div class="sum" id="sm"></div><div id="ls"></div><button id="sv" class="pri">${r.saved?'Update karein':'Save karein'}</button>`;
+  const paint=()=>{
+    $('#ls').innerHTML=st.map((s,i)=>`<div class="row ${s.p?'':'ab'}" data-i="${i}"><div>${esc(s.n)}${s.p?'':`<small>Missed: ${esc($('#tp').value)||'—'}</small>`}</div><b class="pill ${s.p?'':'a'}">${s.p?'Present':'Absent'}</b></div>`).join('');
+    const p=st.filter(s=>s.p).length;$('#sm').textContent=`Present ${p} · Absent ${st.length-p}`};
+  $('#ls').onclick=e=>{const w=e.target.closest('.row');if(w){st[w.dataset.i].p^=1;paint()}};
+  $('#tp').oninput=paint;paint();
+  $('#sv').onclick=async()=>{
+    if(!$('#tp').value.trim())return toast('Pehle topic likhein');
+    $('#sv').disabled=true;const x=await api('save',{course:S.c,date:S.ad,topic:$('#tp').value,students:st});$('#sv').disabled=false;
+    if(x){toast('Save ho gaya ✔');$('#sv').textContent='Update karein'}};
+}
+
+async function vStu(){
+  $('#main').innerHTML=`${courseSel()}<div style="height:8px"></div><textarea id="nn" rows="3" placeholder="Student ke naam (har line mein aik naam)"></textarea>
+   <button id="ad2" class="pri">Add karein</button><h3>Students</h3><div id="ls" class="m">Loading…</div>`;
+  if($('#cs'))$('#cs').onchange=e=>{S.c=e.target.value;vStu()};
+  const load=async()=>{const r=await api('stuList',{course:S.c});if(!r)return;
+    $('#ls').className='';$('#ls').innerHTML=r.names.map(n=>`<div class="row" style="cursor:default"><span>${esc(n)}</span><button class="ghost" data-n="${esc(n)}">✕</button></div>`).join('')||'<span class="m">Abhi koi student nahi</span>'};
+  $('#ad2').onclick=async()=>{if(!$('#nn').value.trim())return;const x=await api('stuAdd',{course:S.c,names:$('#nn').value});if(x){$('#nn').value='';toast('Add ho gaye');load()}};
+  $('#ls').onclick=async e=>{const n=e.target.dataset.n;if(n&&confirm(`"${n}" ko list se hata dein?`)){await api('stuDel',{course:S.c,name:n});load()}};
+  load();
+}
+
+async function vUsr(){
+  $('#main').innerHTML=`<div id="ul" class="m">Loading…</div><h3>Naya user add karein</h3>
+   <input id="un" placeholder="Username (bagair space)" autocapitalize="none"><input id="fn" placeholder="Poora naam">
+   <select id="ro"><option value="teacher">Teacher</option><option value="principal">Principal</option><option value="coordinator">Chief Coordinator</option><option value="admin">Admin</option></select>
+   <div id="cc" class="chk">${COURSES.map(c=>`<label><input type="checkbox" value="${esc(c)}"> ${esc(c)}</label>`).join('')}</div>
+   <input id="pw" placeholder="Password (kam az kam 6)"><button id="ab" class="pri">User add karein</button>`;
+  $('#ro').onchange=()=>$('#cc').style.display=$('#ro').value==='teacher'?'':'none';
+  const load=async()=>{const r=await api('users');if(!r)return;$('#ul').className='';
+    $('#ul').innerHTML=r.users.map(x=>`<div class="card" style="${x.active?'':'opacity:.55'}"><h4>${esc(x.name)}</h4><div class="m">@${esc(x.u)} · ${ROLE[x.role]||x.role}${x.courses?' · '+esc(x.courses):''}${x.active?'':' · Disabled'}</div>
+     <div style="margin-top:8px;display:flex;gap:8px"><button data-a="pw" data-u="${esc(x.u)}">Password reset</button><button data-a="tg" data-u="${esc(x.u)}">${x.active?'Disable':'Enable'}</button></div></div>`).join('')};
+  $('#ul').onclick=async e=>{const a=e.target.dataset.a,u=e.target.dataset.u;if(!a)return;
+    if(a==='pw'){const p=prompt('Naya password (kam az kam 6):');if(p&&await api('userPw',{u,p})){toast('Password change ho gaya')}}
+    else if(await api('userToggle',{u}))load()};
+  $('#ab').onclick=async()=>{const courses=[...document.querySelectorAll('#cc input:checked')].map(i=>i.value);
+    const x=await api('userAdd',{u:$('#un').value,name:$('#fn').value,role:$('#ro').value,courses,p:$('#pw').value});
+    if(x){toast('User add ho gaya');vUsr()}};
+}
+
+if(tok)api('me').then(r=>{if(r){me=r.me;draw()}else vLogin()});else vLogin();
+</script>
+</body>
+</html>
