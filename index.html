@@ -6,12 +6,14 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0b5d57">
 <title>PAFWA Skills Development Centre NRK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
 <style>
-:root{--bg:#f4f6f5;--c:#fff;--t:#14201e;--m:#667570;--p:#0b5d57;--pt:#fff;--ok:#157a43;--no:#c62828;--b:#dbe3e0}
-@media (prefers-color-scheme:dark){:root{--bg:#0e1514;--c:#16201e;--t:#e6eeec;--m:#92a39e;--p:#2bb3a6;--pt:#06201d;--ok:#4cc98a;--no:#ff7b72;--b:#26332f}}
+:root{--bg:#f4f6f5;--c:#fff;--t:#14201e;--m:#667570;--p:#0b5d57;--pt:#fff;--ok:#157a43;--no:#c62828;--lv:#b7791f;--b:#dbe3e0}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1514;--c:#16201e;--t:#e6eeec;--m:#92a39e;--p:#2bb3a6;--pt:#06201d;--ok:#4cc98a;--no:#ff7b72;--lv:#e0b44c;--b:#26332f}}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--t);padding:env(safe-area-inset-top) 0 calc(72px + env(safe-area-inset-bottom))}
+body{font:16px/1.45 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--t);padding:env(safe-area-inset-top) 0 calc(72px + env(safe-area-inset-bottom))}
 header{position:sticky;top:0;z-index:5;background:var(--p);color:var(--pt);display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top))}
 header b{display:block;font-size:.95rem;line-height:1.2}
 header small{opacity:.85}
@@ -21,7 +23,8 @@ input,select,textarea,button{font:inherit;color:inherit}
 input,select,textarea{width:100%;padding:12px;border:1px solid var(--b);border-radius:10px;background:var(--c);margin:0 0 10px}
 textarea{resize:vertical}
 label{display:block;font-size:.9rem;color:var(--m);margin:4px 0}
-button{cursor:pointer;border:0;border-radius:10px;padding:12px 16px;background:var(--c);border:1px solid var(--b)}
+button{cursor:pointer;border-radius:10px;padding:12px 16px;background:var(--c);border:1px solid var(--b)}
+button:disabled{opacity:.6}
 .pri{background:var(--p);color:var(--pt);border-color:var(--p);width:100%;font-weight:600;margin-top:6px}
 .ghost{background:transparent;border-color:transparent;padding:8px 10px}
 header .ghost{color:var(--pt);border:1px solid rgba(255,255,255,.4)}
@@ -29,23 +32,33 @@ header .ghost{color:var(--pt);border:1px solid rgba(255,255,255,.4)}
 @media (max-width:380px){.bar{grid-template-columns:1fr}}
 .card{background:var(--c);border:1px solid var(--b);border-radius:12px;padding:14px;margin-bottom:10px}
 .card h4{margin:0 0 2px;font-size:1.05rem}
-.m{color:var(--m)}
+.m{color:var(--m)}.ok{color:var(--ok)}.no{color:var(--no)}.lv{color:var(--lv)}
 .tag{float:right;font-size:.8rem;padding:2px 10px;border-radius:99px;border:1px solid var(--b)}
-.tag.ok{color:var(--ok);border-color:var(--ok)}.tag.no{color:var(--no);border-color:var(--no)}
-.nums{display:flex;gap:16px;margin:8px 0}
-.nums b{font-size:1.3rem}.nums .g{color:var(--ok)}.nums .r{color:var(--no)}
+.tag.ok{border-color:var(--ok)}.tag.no{border-color:var(--no)}
+.nums{display:flex;flex-wrap:wrap;gap:6px 16px;margin:8px 0}
+.nums b{font-size:1.25rem}
+.pb{height:6px;border-radius:9px;background:var(--b);overflow:hidden;margin:3px 0 9px}
+.pb i{display:block;height:100%;background:var(--p);border-radius:9px}.pb i.t{background:var(--m)}
+.bl{display:flex;justify-content:space-between;gap:8px;font-size:.85rem}
+.rec{border-top:1px solid var(--b);margin-top:10px;padding-top:10px}
+.hrs{font-size:.85rem;color:var(--m);margin:2px 0 6px}
 details summary{cursor:pointer;color:var(--p);padding:4px 0}
-details div{padding:3px 0;border-top:1px solid var(--b)}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--c);border:1px solid var(--b);border-radius:10px;padding:12px;margin-bottom:6px;min-height:52px;cursor:pointer}
-.row small{display:block;color:var(--no)}
-.row.ab{border-color:var(--no)}
-.pill{font-size:.85rem;padding:5px 12px;border-radius:99px;border:1px solid var(--ok);color:var(--ok)}
-.pill.a{border-color:var(--no);color:var(--no)}
-.sum{position:sticky;top:calc(56px + env(safe-area-inset-top));background:var(--bg);padding:6px 0;font-weight:600}
-.chk label{display:flex;gap:8px;align-items:center;color:var(--t);padding:4px 0}
+details>div{padding:5px 0;border-top:1px solid var(--b)}
+details small{display:block}
+svg text{fill:var(--m);font-size:8px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--c);border:1px solid var(--b);border-radius:10px;padding:12px;margin-bottom:6px;min-height:52px;cursor:pointer;user-select:none}
+.row small{display:block;font-size:.8rem}
+.row.ab{border-color:var(--no)}.row.ab small{color:var(--no)}
+.row.lv{border-color:var(--lv)}.row.lv small{color:var(--lv)}
+.pill{font-size:.85rem;padding:5px 12px;border-radius:99px;border:1px solid var(--ok);color:var(--ok);white-space:nowrap}
+.pill.a{border-color:var(--no);color:var(--no)}.pill.l{border-color:var(--lv);color:var(--lv)}
+.sum{position:sticky;top:calc(56px + env(safe-area-inset-top));background:var(--bg);padding:6px 0;font-weight:600;z-index:2}
+.chk label{display:flex;gap:8px;align-items:center;color:var(--t);padding:5px 0}
 .chk input{width:auto;margin:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
 nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--c);border-top:1px solid var(--b);padding-bottom:env(safe-area-inset-bottom);z-index:5}
-nav button{flex:1;border:0;border-radius:0;background:none;padding:8px 2px;font-size:.75rem;color:var(--m);display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button{flex:1;border:0;border-radius:0;background:none;padding:8px 2px;font-size:.72rem;color:var(--m);display:flex;flex-direction:column;align-items:center;gap:2px}
 nav button.on{color:var(--p);font-weight:700}
 .login{max-width:360px;margin:12vh auto 0;padding:20px}
 .login h1{font-size:1.25rem;line-height:1.25;margin:0 0 4px}
@@ -56,112 +69,268 @@ nav button.on{color:var(--p);font-weight:700}
 <div id="app"></div>
 <div id="toast"></div>
 <script>
-const API='https://script.google.com/macros/s/AKfycbzQV71esD5WXnrDVFr-LXv5a7xyjKTHeberGNxqXBcgfv_BGDeZR2NNn3i1uJxWDzwc/exec';   // <-- Apps Script ka Web App URL yahan lagayein
+const API='PASTE_WEB_APP_URL_HERE';   // <-- paste your Apps Script Web App URL here
 const COURSES=['CO/IT Asstt (A)','CO/IT Asstt (B)','DM','CGP'];
 const ROLE={admin:'Admin',teacher:'Teacher',principal:'Principal',coordinator:'Chief Coordinator'};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let tok=sessionStorage.t||'',me=null,tab='',S={};
+const K={}; // in-memory cache: pages open instantly, then refresh in the background
 const today=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+const dd=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
+const sd=s=>s?new Date(s+'T00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'}):'';
+const pct=(a,b)=>b?Math.round(100*a/b):0;
+const bar=(l,r,p,c='')=>`<div class="bl"><span>${l}</span><span class="m">${r}</span></div><div class="pb"><i class="${c}" style="width:${Math.min(100,p)}%"></i></div>`;
 function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',2800)}
-async function api(a,d={}){
+
+async function api(a,d={},tries=2){
+  if(!navigator.onLine){toast('You are offline. Check your internet.');return null}
+  const ac=new AbortController(),to=setTimeout(()=>ac.abort(),25000);
   try{
-    const r=await(await fetch(API,{method:'POST',body:JSON.stringify({a,t:tok,...d})})).json();
-    if(r.err==='auth'){logout();toast('Dobara login karein');return null}
+    const res=await fetch(API,{method:'POST',body:JSON.stringify({a,t:tok,...d}),signal:ac.signal});
+    const txt=await res.text();let r;
+    try{r=JSON.parse(txt)}catch(_){toast('Unexpected reply from server. Re-deploy the script as a new version with access set to "Anyone".');return null}
+    if(r.err==='auth'){logout();toast('Session expired. Please sign in again.');return null}
     if(r.err){toast(r.err);return null}
     return r;
-  }catch(e){toast('Internet ya connection ka masla hai');return null}
+  }catch(e){
+    if(tries>1&&a!=='userAdd'){await new Promise(r=>setTimeout(r,800));return api(a,d,tries-1)}
+    toast(e.name==='AbortError'?'The server took too long. Please try again.':'Could not reach the server. Please try again.');
+    return null;
+  }finally{clearTimeout(to)}
 }
-function logout(){tok='';sessionStorage.t='';me=null;vLogin()}
+const ping=()=>{if(!API.startsWith('PASTE'))fetch(API,{mode:'no-cors'}).catch(()=>{})};
+ping();setInterval(ping,240000);
+
+/* ---------- CSV helpers ---------- */
+function parseCSV(t){
+  const R=[];let r=[],c='',q=0;t=t.replace(/^\uFEFF/,'');
+  for(let i=0;i<t.length;i++){const x=t[i];
+    if(q){if(x==='"'){if(t[i+1]==='"'){c+='"';i++}else q=0}else c+=x}
+    else if(x==='"')q=1;
+    else if(x===','||x==='\t'){r.push(c);c=''}
+    else if(x==='\n'||x==='\r'){if(x==='\r'&&t[i+1]==='\n')i++;r.push(c);R.push(r);r=[];c=''}
+    else c+=x}
+  if(c||r.length){r.push(c);R.push(r)}
+  return R.filter(r=>r.some(x=>x.trim()));
+}
+function parseNames(t){
+  const R=parseCSV(t);if(!R.length)return[];let ix=0;
+  const h=R[0].findIndex(x=>/^\s*(student( name)?|name)s?\s*$/i.test(x));
+  if(h>=0){ix=h;R.shift()}
+  return R.map(r=>(r[ix]||'').trim()).filter(Boolean);
+}
+function parseMods(t){
+  const R=parseCSV(t);if(!R.length)return[];const ix={m:0,t:1,p:2,u:3};
+  if(R[0].some(x=>/^\s*(module( name)?|name)\s*$/i.test(x))){
+    R.shift().forEach((x,i)=>{x=x.toLowerCase();if(/module|name/.test(x))ix.m=i;else if(/theor/.test(x))ix.t=i;else if(/pract/.test(x))ix.p=i;else if(/unit/.test(x))ix.u=i})}
+  const M={};
+  R.forEach(r=>{const n=(r[ix.m]||'').trim();if(!n)return;const m=M[n]=M[n]||{name:n,th:0,pr:0,units:[]};
+    if(+r[ix.t])m.th=+r[ix.t];if(+r[ix.p])m.pr=+r[ix.p];
+    (r[ix.u]||'').split(/[|;\n]/).map(x=>x.trim()).filter(Boolean).forEach(u=>{if(!m.units.includes(u))m.units.push(u)})});
+  return Object.values(M);
+}
+const pickFile=cb=>{const i=document.createElement('input');i.type='file';i.accept='.csv,.txt,text/csv';
+  i.onchange=async()=>{if(i.files[0])cb(await i.files[0].text())};i.click()};
+
+/* ---------- shell ---------- */
+function logout(){tok='';sessionStorage.t='';me=null;for(const k in K)delete K[k];vLogin()}
 const courseSel=()=>{const cs=me.courses;if(!cs.includes(S.c))S.c=cs[0];
   return cs.length>1?`<select id="cs">${cs.map(c=>`<option ${c==S.c?'selected':''}>${esc(c)}</option>`).join('')}</select>`:`<b>${esc(S.c)}</b>`};
 
 function vLogin(){
-  $('#app').innerHTML=`<div class="login"><h1>PAFWA Skills Development Centre NRK</h1><p class="m">Sirf staff ke liye. Login karein.</p>
+  $('#app').innerHTML=`<div class="login"><h1>PAFWA Skills Development Centre NRK</h1><p class="m">Staff only. Sign in to continue.</p>
   <input id="u" placeholder="Username" autocapitalize="none" autocomplete="username">
   <input id="p" type="password" placeholder="Password" autocomplete="current-password">
-  <button id="go" class="pri">Login</button></div>`;
-  const go=async()=>{$('#go').disabled=true;const r=await api('login',{u:$('#u').value,p:$('#p').value});$('#go').disabled=false;
-    if(r){tok=r.t;sessionStorage.t=tok;me=r.me;S={};tab='';draw()}};
+  <button id="go" class="pri">Sign in</button></div>`;
+  const go=async()=>{$('#go').disabled=true;$('#go').textContent='Signing in…';
+    const r=await api('login',{u:$('#u').value,p:$('#p').value});
+    if(r){tok=r.t;sessionStorage.t=tok;me=r.me;S={};tab='';draw()}else{$('#go').disabled=false;$('#go').textContent='Sign in'}};
   $('#go').onclick=go;$('#p').onkeydown=e=>{if(e.key==='Enter')go()};
 }
 
 function draw(){
-  const T={dash:['📊','Dashboard'],att:['✅','Attendance'],stu:['👥','Students'],usr:['🔑','Users']};
-  const tabs=me.role==='teacher'?['att','stu']:me.role==='admin'?['dash','att','stu','usr']:['dash'];
+  const T={dash:['📊','Dashboard'],att:['✅','Attendance'],stu:['👥','Students'],syl:['📚','Syllabus'],usr:['🔑','Users']};
+  const tabs=me.role==='teacher'?['att','stu','syl']:me.role==='admin'?['dash','att','stu','syl','usr']:['dash'];
   if(!tabs.includes(tab))tab=tabs[0];
-  $('#app').innerHTML=`<header><div><b>PAFWA Skills Development Centre NRK</b><small>${esc(me.name)} (${ROLE[me.role]})</small></div><button id="lo" class="ghost">Logout</button></header><main id="main"></main>`+
-   (tabs.length>1?`<nav>${tabs.map(t=>`<button data-t="${t}" class="${t==tab?'on':''}"><span style="font-size:1.25rem">${T[t][0]}</span>${T[t][1]}</button>`).join('')}</nav>`:'');
+  $('#app').innerHTML=`<header><div><b>PAFWA Skills Development Centre NRK</b><small>${esc(me.name)} (${ROLE[me.role]})</small></div><button id="lo" class="ghost">Sign out</button></header><main id="main"></main>`+
+   (tabs.length>1?`<nav>${tabs.map(t=>`<button data-t="${t}" class="${t==tab?'on':''}"><span style="font-size:1.2rem">${T[t][0]}</span>${T[t][1]}</button>`).join('')}</nav>`:'');
   $('#lo').onclick=logout;
   document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;draw()});
-  ({dash:vDash,att:vAtt,stu:vStu,usr:vUsr})[tab]();
+  ({dash:vDash,att:vAtt,stu:vStu,syl:vSyl,usr:vUsr})[tab]();
 }
 
+/* ---------- progress chart (cumulative units vs. ideal pace) ---------- */
+function chart(p,start,dl,D){
+  if(!p.total)return '<p class="m">Add modules and units to see the chart.</p>';
+  const W=300,H=118,L=26,B=18,iw=W-L-8,ih=H-B-8;
+  const t0=new Date(start||p.series[0]?.[0]||D),t1=new Date(dl||D),span=Math.max(864e5,t1-t0);
+  const X=d=>(L+Math.min(1,Math.max(0,(new Date(d)-t0)/span))*iw).toFixed(1),Y=v=>(8+ih-v/p.total*ih).toFixed(1);
+  const pts=[[start||p.series[0]?.[0]||D,0],...p.series];
+  if(pts[pts.length-1][0]<D)pts.push([D,p.count]);
+  const path=pts.map((q,i)=>(i?'L':'M')+X(q[0])+' '+Y(q[1])).join('');
+  const last=pts[pts.length-1];
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Progress chart">
+   <line x1="${L}" y1="${Y(0)}" x2="${W-8}" y2="${Y(0)}" stroke="var(--b)"/><line x1="${L}" y1="8" x2="${W-8}" y2="8" stroke="var(--b)"/>
+   ${start&&dl?`<line x1="${X(start)}" y1="${Y(0)}" x2="${X(dl)}" y2="${Y(p.total)}" stroke="var(--m)" stroke-dasharray="3 3"/>`:''}
+   <path d="${path}" fill="none" stroke="var(--p)" stroke-width="2" stroke-linejoin="round"/>
+   <circle cx="${X(last[0])}" cy="${Y(last[1])}" r="3" fill="var(--p)"/>
+   <text x="2" y="${Y(p.total)}" dy="3">${p.total}</text><text x="2" y="${Y(0)}" dy="3">0</text>
+   <text x="${L}" y="${H-4}">${sd(t0.toISOString().slice(0,10))}</text><text x="${W-8}" y="${H-4}" text-anchor="end">${dl?sd(dl):''}</text></svg>
+   <div class="hrs">Solid: units covered · Dashed: pace needed to meet the deadline</div>`;
+}
+
+/* ---------- dashboard ---------- */
+const absList=(t,l,topic)=>l.length?`<details><summary class="${t=='Absent'?'no':'lv'}">${t} (${l.length})</summary>${l.map(s=>`<div>${esc(s.n)}<small class="m">Total: Absent ${s.a} · Leave ${s.l}</small><small class="m">Missed: ${esc(topic)}</small></div>`).join('')}</details>`:'';
+function dashCard(i,D){
+  const p=i.prog,sp=pct(p.count,p.total);let tl,st='';
+  if(i.start&&i.deadline){
+    const T=Math.max(1,dd(i.start,i.deadline)),el=Math.min(T,Math.max(0,dd(i.start,D))),tp=pct(el,T),left=dd(D,i.deadline);
+    const delta=p.count-p.total*el/T,tol=p.total*.03;
+    tl=bar('Time',`${tp}% · ${left>=0?left+' days left':-left+' days overdue'} · ${sd(i.deadline)}`,tp,'t');
+    if(p.total)st=delta>tol?`<span class="ok">Ahead by ${Math.round(delta)} units</span>`:delta<-tol?`<span class="no">Behind by ${Math.ceil(-delta)} units</span>`:`<span class="ok">On track</span>`;
+  }else tl='<div class="m" style="margin:4px 0 8px">Deadline not set</div>';
+  const rec=i.topic?`<div class="rec"><b>${esc(i.topic)}</b>
+    ${i.module?`<div class="hrs">Module hours: Theory ${i.th}h · Practical ${i.pr}h</div>`:''}
+    <div class="m">Instructor: ${esc(i.by)}</div>
+    <div class="nums"><span class="ok"><b>${i.present}</b> Present</span><span class="no"><b>${i.absent.length}</b> Absent</span><span class="lv"><b>${i.leave.length}</b> Leave</span><span class="m"><b>${i.total}</b> Total</span></div>
+    ${absList('Absent',i.absent,i.topic)}${absList('Leave',i.leave,i.topic)}</div>`:'';
+  return `<div class="card"><span class="tag ${i.topic?'ok':'no'}">${i.topic?'Updated':'Pending'}</span><h4>${esc(i.course)}</h4>
+   <div style="height:8px"></div>${bar('Syllabus',`${p.count}/${p.total} units · ${sp}%`,sp)}${tl}${st}
+   ${i.topic?rec:'<div class="m rec">No record uploaded for this date</div>'}
+   <details style="margin-top:8px"><summary>Progress chart &amp; modules</summary><div>${chart(p,i.start,i.deadline,D)}</div>
+   ${i.mods.map(m=>`<div>${esc(m.name)}<div class="hrs">Theory ${m.th}h · Practical ${m.pr}h · ${m.d}/${m.n} units</div><div class="pb"><i style="width:${pct(m.d,m.n)}%"></i></div></div>`).join('')||'<div class="m">No modules added yet</div>'}</details></div>`;
+}
 async function vDash(){
-  const dt=S.dd||today();
+  const dt=S.dd||today(),key='d'+dt;
   $('#main').innerHTML=`<input type="date" id="dd" value="${dt}"><div id="out" class="m">Loading…</div>`;
   $('#dd').onchange=e=>{S.dd=e.target.value||today();vDash()};
-  const r=await api('dash',{date:dt});if(!r)return;
-  $('#out').innerHTML=r.items.map(i=>!i.topic?
-   `<div class="card"><span class="tag no">Pending</span><h4>${esc(i.course)}</h4><span class="m">Is din ka record upload nahi hua</span></div>`:
-   `<div class="card"><span class="tag ok">Updated</span><h4>${esc(i.course)}</h4><div class="m">Instructor: ${esc(i.by)}</div>
-    <p style="margin:8px 0 0"><b>Topic:</b> ${esc(i.topic)}</p>
-    <div class="nums"><span class="g"><b>${i.present}</b> Present</span><span class="r"><b>${i.absent.length}</b> Absent</span><span class="m"><b>${i.total}</b> Total</span></div>
-    ${i.absent.length?`<details><summary>Absent students</summary>${i.absent.map(n=>`<div>${esc(n)} <small class="m">— miss: ${esc(i.topic)}</small></div>`).join('')}</details>`:''}</div>`).join('');
+  const show=items=>{if(tab!=='dash'||!$('#out'))return;$('#out').className='';$('#out').innerHTML=items.map(i=>dashCard(i,dt)).join('')};
+  if(K[key])show(K[key]);
+  const r=await api('dash',{date:dt});if(r){K[key]=r.items;show(r.items)}
 }
 
+/* ---------- attendance ---------- */
 async function vAtt(){
   S.ad=S.ad||today();
   $('#main').innerHTML=`<div class="bar">${courseSel()}<input type="date" id="ad" max="${today()}" value="${S.ad}"></div><div id="bx" class="m">Loading…</div>`;
   if($('#cs'))$('#cs').onchange=e=>{S.c=e.target.value;vAtt()};
   $('#ad').onchange=e=>{S.ad=e.target.value||today();vAtt()};
-  const r=await api('day',{course:S.c,date:S.ad});if(!r)return;
-  const st=r.students;
-  if(!st.length){$('#bx').innerHTML='Is class mein abhi students nahi hain. "Students" tab se naam add karein.';return}
+  const r=await api('day',{course:S.c,date:S.ad});if(!r||!$('#bx'))return;
+  const st=r.students,mods=r.mods;let mod=r.module||'';const us=new Set(r.units||[]);
+  if(!st.length){$('#bx').innerHTML='This class has no students yet. Add names in the Students tab.';return}
   $('#bx').className='';
-  $('#bx').innerHTML=`<label>Aaj parhaya gaya topic</label><textarea id="tp" rows="2" placeholder="Topic likhein">${esc(r.topic)}</textarea>
-   <div class="sum" id="sm"></div><div id="ls"></div><button id="sv" class="pri">${r.saved?'Update karein':'Save karein'}</button>`;
+  $('#bx').innerHTML=(mods.length?`<label>Module</label><select id="md"><option value="">Select module</option>${mods.map(m=>`<option ${m.name===mod?'selected':''}>${esc(m.name)}</option>`).join('')}</select><div id="un"></div>`:
+    '<p class="m">No modules yet. Add them in the Syllabus tab, or just write the topic below.</p>')+
+   `<label>Note / topic (optional when units are selected)</label><textarea id="tp" rows="2">${esc(r.note)}</textarea>
+   <div class="sum" id="sm"></div><div id="ls"></div><button id="sv" class="pri">${r.saved?'Update record':'Save record'}</button>`;
+  const topic=()=>{const n=$('#tp').value.trim(),u=[...us].join(', ');return((mod&&u?`${mod}: ${u}`:'')+(n?(mod&&u?' — ':'')+n:''))||'—'};
+  const drawU=()=>{const m=mods.find(x=>x.name===mod);if(!$('#un'))return;
+    if(!m){$('#un').innerHTML='';return}
+    const un=m.units.length?m.units:[m.name],dn=r.done[mod]||[];
+    $('#un').innerHTML=`<div class="hrs">Theory ${m.th}h · Practical ${m.pr}h</div><div class="chk">${un.map(u=>`<label><input type="checkbox" data-u="${esc(u)}" ${us.has(u)?'checked':''}> ${esc(u)}${dn.includes(u)&&!us.has(u)?' <span class="m">(done earlier)</span>':''}</label>`).join('')}</div>`};
+  const L={P:['Present',''],A:['Absent','ab'],L:['Leave','lv']};
   const paint=()=>{
-    $('#ls').innerHTML=st.map((s,i)=>`<div class="row ${s.p?'':'ab'}" data-i="${i}"><div>${esc(s.n)}${s.p?'':`<small>Missed: ${esc($('#tp').value)||'—'}</small>`}</div><b class="pill ${s.p?'':'a'}">${s.p?'Present':'Absent'}</b></div>`).join('');
-    const p=st.filter(s=>s.p).length;$('#sm').textContent=`Present ${p} · Absent ${st.length-p}`};
-  $('#ls').onclick=e=>{const w=e.target.closest('.row');if(w){st[w.dataset.i].p^=1;paint()}};
+    $('#ls').innerHTML=st.map((s,i)=>{const a=s.a+(s.s==='A'),l=s.l+(s.s==='L');
+      return `<div class="row ${L[s.s][1]}" data-i="${i}"><div>${esc(s.n)}${s.s==='P'?'':`<small>Missed: ${esc(topic())}</small><small>Total absent ${a} · leave ${l}</small>`}</div><b class="pill ${s.s==='A'?'a':s.s==='L'?'l':''}">${L[s.s][0]}</b></div>`}).join('');
+    const c=x=>st.filter(s=>s.s===x).length;$('#sm').textContent=`Present ${c('P')} · Absent ${c('A')} · Leave ${c('L')}`};
+  if($('#md')){$('#md').onchange=e=>{mod=e.target.value;us.clear();drawU();paint()};
+    $('#un').onchange=e=>{const u=e.target.dataset.u;if(u){e.target.checked?us.add(u):us.delete(u);paint()}};drawU()}
+  $('#ls').onclick=e=>{const w=e.target.closest('.row');if(w){const s=st[w.dataset.i];s.s={P:'A',A:'L',L:'P'}[s.s];paint()}};
   $('#tp').oninput=paint;paint();
   $('#sv').onclick=async()=>{
-    if(!$('#tp').value.trim())return toast('Pehle topic likhein');
-    $('#sv').disabled=true;const x=await api('save',{course:S.c,date:S.ad,topic:$('#tp').value,students:st});$('#sv').disabled=false;
-    if(x){toast('Save ho gaya ✔');$('#sv').textContent='Update karein'}};
+    if(!us.size&&!$('#tp').value.trim())return toast('Select the unit(s) taught or write a topic');
+    $('#sv').disabled=true;$('#sv').textContent='Saving…';
+    const x=await api('save',{course:S.c,date:S.ad,module:mod,units:[...us],note:$('#tp').value,students:st.map(s=>({n:s.n,s:s.s}))});
+    if(!$('#sv'))return;$('#sv').disabled=false;
+    if(x){toast('Saved ✔');for(const k in K)if(k[0]==='d'||k[0]==='y')delete K[k]}
+    $('#sv').textContent=x?'Update record':'Save record'};
 }
 
+/* ---------- students ---------- */
 async function vStu(){
-  $('#main').innerHTML=`${courseSel()}<div style="height:8px"></div><textarea id="nn" rows="3" placeholder="Student ke naam (har line mein aik naam)"></textarea>
-   <button id="ad2" class="pri">Add karein</button><h3>Students</h3><div id="ls" class="m">Loading…</div>`;
+  $('#main').innerHTML=`${courseSel()}<div style="height:8px"></div><textarea id="nn" rows="3" placeholder="Student names (one per line)"></textarea>
+   <div class="acts"><button id="ad2" class="pri" style="flex:1;margin:0">Add students</button><button id="up">Upload CSV</button></div>
+   <div class="hrs">CSV: one student name per row (first column, or a column titled "Name").</div><h3>Students <span class="m" id="cnt"></span></h3><div id="ls"></div>`;
+  const key=()=>'s'+S.c;
+  const show=n=>{if(tab!=='stu'||!$('#ls'))return;$('#cnt').textContent=n.length?`(${n.length})`:'';
+    $('#ls').innerHTML=n.map(x=>`<div class="row" style="cursor:default"><span>${esc(x)}</span><button class="ghost" data-n="${esc(x)}" aria-label="Remove">✕</button></div>`).join('')||'<span class="m">No students yet</span>'};
+  const load=async()=>{const k=key();K[k]?show(K[k]):$('#ls').innerHTML='<span class="m">Loading…</span>';
+    const r=await api('stuList',{course:S.c});if(r){K[k]=r.names;if(key()===k)show(r.names)}};
   if($('#cs'))$('#cs').onchange=e=>{S.c=e.target.value;vStu()};
-  const load=async()=>{const r=await api('stuList',{course:S.c});if(!r)return;
-    $('#ls').className='';$('#ls').innerHTML=r.names.map(n=>`<div class="row" style="cursor:default"><span>${esc(n)}</span><button class="ghost" data-n="${esc(n)}">✕</button></div>`).join('')||'<span class="m">Abhi koi student nahi</span>'};
-  $('#ad2').onclick=async()=>{if(!$('#nn').value.trim())return;const x=await api('stuAdd',{course:S.c,names:$('#nn').value});if(x){$('#nn').value='';toast('Add ho gaye');load()}};
-  $('#ls').onclick=async e=>{const n=e.target.dataset.n;if(n&&confirm(`"${n}" ko list se hata dein?`)){await api('stuDel',{course:S.c,name:n});load()}};
+  const addNames=async list=>{ // appears instantly; saved in the background
+    if(!list.length)return;
+    const k=key(),c=S.c,cur=K[k]||[];K[k]=[...cur,...list.filter(n=>!cur.includes(n))];show(K[k]);toast(`Saving ${list.length} name(s)…`);
+    const r=await api('stuAdd',{course:c,names:list.join('\n')});
+    if(r){K[k]=r.names;if(key()===k)show(r.names);toast('Saved ✔')}else if(key()===k)load()};
+  $('#ad2').onclick=()=>{const l=$('#nn').value.split('\n').map(s=>s.trim()).filter(Boolean);$('#nn').value='';addNames(l)};
+  $('#up').onclick=()=>pickFile(t=>{const l=parseNames(t);l.length?addNames(l):toast('No names found in this file')});
+  $('#ls').onclick=async e=>{const n=e.target.dataset.n;if(!n||!confirm(`Remove "${n}" from this class?`))return;
+    const k=key(),c=S.c;K[k]=(K[k]||[]).filter(x=>x!==n);show(K[k]);
+    const r=await api('stuDel',{course:c,name:n});
+    if(r){K[k]=r.names;if(key()===k)show(r.names)}else if(key()===k)load()};
   load();
 }
 
-async function vUsr(){
-  $('#main').innerHTML=`<div id="ul" class="m">Loading…</div><h3>Naya user add karein</h3>
-   <input id="un" placeholder="Username (bagair space)" autocapitalize="none"><input id="fn" placeholder="Poora naam">
-   <select id="ro"><option value="teacher">Teacher</option><option value="principal">Principal</option><option value="coordinator">Chief Coordinator</option><option value="admin">Admin</option></select>
-   <div id="cc" class="chk">${COURSES.map(c=>`<label><input type="checkbox" value="${esc(c)}"> ${esc(c)}</label>`).join('')}</div>
-   <input id="pw" placeholder="Password (kam az kam 6)"><button id="ab" class="pri">User add karein</button>`;
-  $('#ro').onchange=()=>$('#cc').style.display=$('#ro').value==='teacher'?'':'none';
-  const load=async()=>{const r=await api('users');if(!r)return;$('#ul').className='';
-    $('#ul').innerHTML=r.users.map(x=>`<div class="card" style="${x.active?'':'opacity:.55'}"><h4>${esc(x.name)}</h4><div class="m">@${esc(x.u)} · ${ROLE[x.role]||x.role}${x.courses?' · '+esc(x.courses):''}${x.active?'':' · Disabled'}</div>
-     <div style="margin-top:8px;display:flex;gap:8px"><button data-a="pw" data-u="${esc(x.u)}">Password reset</button><button data-a="tg" data-u="${esc(x.u)}">${x.active?'Disable':'Enable'}</button></div></div>`).join('')};
-  $('#ul').onclick=async e=>{const a=e.target.dataset.a,u=e.target.dataset.u;if(!a)return;
-    if(a==='pw'){const p=prompt('Naya password (kam az kam 6):');if(p&&await api('userPw',{u,p})){toast('Password change ho gaya')}}
-    else if(await api('userToggle',{u}))load()};
-  $('#ab').onclick=async()=>{const courses=[...document.querySelectorAll('#cc input:checked')].map(i=>i.value);
-    const x=await api('userAdd',{u:$('#un').value,name:$('#fn').value,role:$('#ro').value,courses,p:$('#pw').value});
-    if(x){toast('User add ho gaya');vUsr()}};
+/* ---------- syllabus: timeline + modules + units ---------- */
+async function vSyl(){
+  const c=S.c&&me.courses.includes(S.c)?S.c:me.courses[0];S.c=c;let first=1;
+  $('#main').innerHTML=`${courseSel()}
+   <div class="card" style="margin-top:10px"><h4>Course timeline</h4><div class="two" style="margin-top:8px"><div><label>Start date</label><input type="date" id="sdt"></div><div><label>Deadline</label><input type="date" id="dl"></div></div><button id="sv" class="pri" style="margin-top:0">Save timeline</button></div>
+   <div class="card" id="pg"><span class="m">Loading…</span></div>
+   <div class="card"><h4>Add modules</h4><div class="acts"><button id="up">Upload CSV</button><button id="tp" class="ghost">Download template</button></div>
+    <div class="hrs">CSV columns: module, theory_hrs, practical_hrs, units (separate units with |)</div>
+    <input id="mn" placeholder="Module name (e.g. Module 1 - Computer Basics)"><div class="two"><input id="mt" type="number" min="0" placeholder="Theory hours"><input id="mp" type="number" min="0" placeholder="Practical hours"></div>
+    <textarea id="mu" rows="4" placeholder="Units (one per line)"></textarea><button id="ms" class="pri" style="margin-top:0">Save module</button></div>
+   <div id="ml"></div>`;
+  if($('#cs'))$('#cs').onchange=e=>{S.c=e.target.value;vSyl()};
+  const k='y'+c;
+  const show=y=>{if(tab!=='syl'||!$('#pg'))return;
+    if(first){$('#sdt').value=y.start;$('#dl').value=y.deadline;first=0}
+    const p=y.prog,sp=pct(p.count,p.total);
+    $('#pg').innerHTML=`<h4>Progress</h4><div style="height:6px"></div>${bar('Units covered',`${p.count}/${p.total} · ${sp}%`,sp)}<div class="hrs">${p.hrs} of ${p.hrsAll} hours covered</div>`;
+    $('#ml').innerHTML=y.mods.map((m,i)=>`<div class="card"><b>${esc(m.name)}</b><div class="hrs">Theory ${m.th}h · Practical ${m.pr}h · ${m.units.length} unit(s)</div>
+      <div class="m" style="font-size:.85rem">${m.units.map(esc).join(' · ')}</div><div class="acts" style="margin:8px 0 0"><button data-a="e" data-i="${i}">Edit</button><button data-a="d" data-i="${i}">Delete</button></div></div>`).join('')||'<p class="m">No modules yet.</p>'};
+  const apply=r=>{if(r){K[k]=r;show(r);return 1}};
+  if(K[k])show(K[k]);
+  apply(await api('syl',{course:c}));
+  $('#sv').onclick=async()=>{if(apply(await api('setDates',{course:c,start:$('#sdt').value,deadline:$('#dl').value})))toast('Timeline saved ✔')};
+  const saveMods=async l=>{if(apply(await api('modAdd',{course:c,mods:l}))){toast('Modules saved ✔');return 1}};
+  $('#ms').onclick=async()=>{const name=$('#mn').value.trim();if(!name)return toast('Enter the module name');
+    if(await saveMods([{name,th:+$('#mt').value||0,pr:+$('#mp').value||0,units:$('#mu').value.split('\n').map(s=>s.trim()).filter(Boolean)}]))['mn','mt','mp','mu'].forEach(i=>$('#'+i).value='')};
+  $('#up').onclick=()=>pickFile(t=>{const l=parseMods(t);l.length?saveMods(l):toast('No modules found in this file')});
+  $('#tp').onclick=()=>{const b=new Blob(['module,theory_hrs,practical_hrs,units\n"Module 1 - Computer Basics",20,40,Unit 1.1 Hardware|Unit 1.2 Software|Unit 1.3 Windows\n"Module 2 - MS Office",16,32,Unit 2.1 Word|Unit 2.2 Excel\n'],{type:'text/csv'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='modules-template.csv';a.click()};
+  $('#ml').onclick=async e=>{const a=e.target.dataset.a,m=K[k]&&K[k].mods[e.target.dataset.i];if(!a||!m)return;
+    if(a==='e'){$('#mn').value=m.name;$('#mt').value=m.th;$('#mp').value=m.pr;$('#mu').value=m.units.join('\n');$('#mn').scrollIntoView({block:'center'});toast('Edit the details, then tap Save module')}
+    else if(confirm(`Delete "${m.name}"? Past attendance records stay, but this module no longer counts in progress.`))apply(await api('modDel',{course:c,name:m.name}))};
 }
 
-if(tok)api('me').then(r=>{if(r){me=r.me;draw()}else vLogin()});else vLogin();
+/* ---------- users (admin) ---------- */
+async function vUsr(){
+  $('#main').innerHTML=`<div id="ul" class="m">Loading…</div><h3>Add new user</h3>
+   <input id="un" placeholder="Username (no spaces)" autocapitalize="none"><input id="fn" placeholder="Full name">
+   <select id="ro"><option value="teacher">Teacher</option><option value="principal">Principal</option><option value="coordinator">Chief Coordinator</option><option value="admin">Admin</option></select>
+   <div id="cc" class="chk">${COURSES.map(c=>`<label><input type="checkbox" value="${esc(c)}"> ${esc(c)}</label>`).join('')}</div>
+   <input id="pw" placeholder="Password (at least 6 characters)"><button id="ab" class="pri">Add user</button>`;
+  $('#ro').onchange=()=>$('#cc').style.display=$('#ro').value==='teacher'?'':'none';
+  const show=list=>{if(tab!=='usr'||!$('#ul'))return;$('#ul').className='';
+    $('#ul').innerHTML=list.map(x=>`<div class="card" style="${x.active?'':'opacity:.55'}"><h4>${esc(x.name)}</h4><div class="m">@${esc(x.u)} · ${ROLE[x.role]||x.role}${x.courses?' · '+esc(x.courses):''}${x.active?'':' · Disabled'}</div>
+     <div class="acts" style="margin:8px 0 0"><button data-a="pw" data-u="${esc(x.u)}">Reset password</button><button data-a="tg" data-u="${esc(x.u)}">${x.active?'Disable':'Enable'}</button></div></div>`).join('')};
+  if(K.users)show(K.users);
+  const r0=await api('users');if(r0){K.users=r0.users;show(r0.users)}
+  $('#ul').onclick=async e=>{const a=e.target.dataset.a,u=e.target.dataset.u;if(!a)return;
+    if(a==='pw'){const p=prompt('New password (at least 6 characters):');if(p&&await api('userPw',{u,p}))toast('Password changed ✔')}
+    else{K.users=K.users.map(x=>x.u===u?{...x,active:!x.active}:x);show(K.users);
+      const r=await api('userToggle',{u});if(r){K.users=r.users;show(r.users)}else vUsr()}};
+  $('#ab').onclick=async()=>{const courses=[...document.querySelectorAll('#cc input:checked')].map(i=>i.value);
+    $('#ab').disabled=true;$('#ab').textContent='Adding…';
+    const x=await api('userAdd',{u:$('#un').value,name:$('#fn').value,role:$('#ro').value,courses,p:$('#pw').value});
+    if(!$('#ab'))return;$('#ab').disabled=false;$('#ab').textContent='Add user';
+    if(x){K.users=x.users;show(x.users);['un','fn','pw'].forEach(i=>$('#'+i).value='');document.querySelectorAll('#cc input').forEach(i=>i.checked=false);toast('User added ✔')}};
+}
+
+if(tok)api('me').then(r=>{if(r){me=r.me;draw()}else if(!me)vLogin()});else vLogin();
 </script>
 </body>
 </html>
